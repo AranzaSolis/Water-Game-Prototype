@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill The Bucket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <button class="settings-button" id="settings-button" type="button" aria-label="Settings" title="Settings">
+            <span aria-hidden="true">⚙</span>
+        </button>
+
+        <div class="drop-total" aria-label="Total drops collected">
+            <span aria-hidden="true">💧</span>
+            <span id="total-drops">0</span>
+        </div>
+
+        <section class="home-screen" id="home-screen" aria-labelledby="home-title">
+            <div class="home-copy">
+                <h1 class="game-title" id="home-title">Fill The Bucket</h1>
+                <p class="home-tagline">Every drop counts.</p>
+            </div>
+
+            <div class="can-stage" aria-hidden="true">
+                <span class="sparkle sparkle-one">✦</span>
+                <span class="sparkle sparkle-two">✦</span>
+                <img class="jerry-can" src="./img/water-can-transparent.png?v=2" alt="" loading="eager" fetchpriority="high">
+                <span class="can-shadow"></span>
+            </div>
+
+            <div class="home-actions">
+                <button class="start-button" id="start-btn" type="button">START GAME</button>
+                <div class="secondary-actions">
+                    <button class="secondary-button" id="how-to-play" type="button">HOW TO PLAY <span aria-hidden="true">❔</span></button>
+                    <button class="secondary-button" id="store" type="button">STORE <span aria-hidden="true">🛍️</span></button>
+                </div>
+            </div>
+
+            <aside class="fun-fact" aria-live="polite">
+                <span class="fun-fact-label">FUN FACT</span>
+                <p id="fun-fact-text"></p>
+            </aside>
+
+            <footer class="brand-strip">
+                <img src="./img/water-can-transparent.png?v=2" alt="">
+                <span>charity: water</span>
+                <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer" aria-label="Learn more about charity: water">Learn more -&gt;</a>
+            </footer>
+        </section>
+
+        <section class="game-screen game-wrapper" id="game-screen" hidden>
+            <h1 class="game-title">Fill The Bucket</h1>
+            <p class="game-tagline">Catch the good drops, avoid the polluted ones!</p>
+            <div class="score-panel">
+                <div class="score">Drops: <span id="score">0</span></div>
+                <div class="timer">Time: <span id="time">30</span>s</div>
+                <button id="restart-btn" type="button">Back Home</button>
+            </div>
+
+            <div id="game-container">
+                <div class="bucket-cursor" id="bucket-cursor" aria-hidden="true">
+                    <span class="bucket-handle"></span>
+                </div>
+            </div>
+        </section>
+
+        <dialog class="info-dialog" id="how-to-dialog">
+            <button class="dialog-close" type="button" aria-label="Close how to play">×</button>
+            <p class="eyebrow">How to play</p>
+            <h2>Catch every drop.</h2>
+            <p>Press start, then move the bucket under the blue drops to catch them. Avoid gray polluted drops and collect as many points as possible in 30 seconds.</p>
+        </dialog>
+
+        <dialog class="info-dialog" id="store-dialog">
+            <button class="dialog-close" type="button" aria-label="Close store">×</button>
+            <p class="eyebrow">The store</p>
+            <h2>Coming soon.</h2>
+            <p>More ways to make every drop count are on their way.</p>
+        </dialog>
+
+        <dialog class="info-dialog results-dialog" id="game-over-dialog">
+            <h2 class="results-title">GAME OVER!</h2>
+            <p class="results-label">Water Collected:</p>
+            <div class="results-drop-count">
+                <span aria-hidden="true">💧</span>
+                <strong id="game-over-score">0</strong>
+            </div>
+            <div class="results-trophy" aria-hidden="true">🏆</div>
+            <p class="results-label">Best Score:</p>
+            <div class="results-drop-count">
+                <span aria-hidden="true">💧</span>
+                <strong id="best-score">0</strong>
+            </div>
+            <div class="results-actions">
+                <button class="results-try-again-button" id="results-try-again" type="button">Try Again</button>
+                <button class="results-store-button" id="results-store" type="button">Visit Store</button>
+                <button class="results-home-button" id="results-home-button" type="button">Home</button>
+            </div>
+        </dialog>
+
+        <dialog class="info-dialog settings-dialog" id="settings-dialog">
+            <button class="dialog-close" type="button" aria-label="Close settings">×</button>
+            <h2>Settings</h2>
+            <div class="settings-list">
+                <label class="setting-row" for="volume-control">
+                    <span>Sound volume</span>
+                    <output id="volume-value" for="volume-control">70%</output>
+                </label>
+                <input id="volume-control" type="range" min="0" max="100" value="70">
+                <label class="setting-row setting-toggle" for="sound-toggle">
+                    <span>Sound effects</span>
+                    <input id="sound-toggle" type="checkbox" checked>
+                </label>
+                <label class="setting-row setting-toggle" for="facts-toggle">
+                    <span>Show fun facts</span>
+                    <input id="facts-toggle" type="checkbox" checked>
+                </label>
+                <button class="reset-button" id="reset-settings" type="button">Reset settings</button>
+            </div>
+        </dialog>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
