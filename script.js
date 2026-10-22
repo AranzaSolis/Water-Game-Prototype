@@ -44,6 +44,7 @@ const volumeValue = document.getElementById("volume-value");
 const soundToggle = document.getElementById("sound-toggle");
 const factsToggle = document.getElementById("facts-toggle");
 const resetSettingsButton = document.getElementById("reset-settings");
+const confettiContainer = document.getElementById("confetti-container");
 let bucketPosition = 0;
 
 totalDropsElement.textContent = totalDrops;
@@ -56,7 +57,7 @@ document.body.classList.toggle("facts-hidden", !factsVisible);
 showRandomFunFact();
 
 document.getElementById("start-btn").addEventListener("click", startGame);
-document.getElementById("restart-btn").addEventListener("click", returnHome);
+document.getElementById("restart-btn").addEventListener("click", resetGame);
 document.getElementById("results-home-button").addEventListener("click", returnHome);
 document.getElementById("results-try-again").addEventListener("click", () => {
   gameOverDialog.close();
@@ -145,6 +146,17 @@ function returnHome() {
   showRandomFunFact();
 }
 
+function resetGame() {
+  clearTimeout(dropMaker);
+  clearInterval(countdownMaker);
+  clearInterval(collisionChecker);
+  gameRunning = false;
+  clearDrops();
+  gameOverDialog.close();
+  clearConfetti();
+  startGame();
+}
+
 function endGame() {
   clearTimeout(dropMaker);
   clearInterval(countdownMaker);
@@ -158,7 +170,32 @@ function endGame() {
     localStorage.setItem("bestScore", bestScore);
   }
   bestScoreElement.textContent = bestScore;
+  if (gameDropsCollected > 0) {
+    launchConfetti();
+  }
   gameOverDialog.showModal();
+}
+
+function launchConfetti() {
+  clearConfetti();
+
+  const colors = ["#5ba8d8", "#202020", "#f5c542", "#ffffff"];
+  for (let index = 0; index < 36; index += 1) {
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.style.setProperty("--confetti-color", colors[index % colors.length]);
+    piece.style.setProperty("--confetti-left", `${Math.random() * 100}%`);
+    piece.style.setProperty("--confetti-delay", `${Math.random() * 0.35}s`);
+    piece.style.setProperty("--confetti-duration", `${1.6 + Math.random() * 1.2}s`);
+    piece.style.setProperty("--confetti-rotation", `${Math.random() * 360}deg`);
+    confettiContainer.appendChild(piece);
+  }
+
+  window.setTimeout(clearConfetti, 3200);
+}
+
+function clearConfetti() {
+  confettiContainer.replaceChildren();
 }
 
 function showRandomFunFact() {

@@ -244,6 +244,24 @@ button {
     color: #ffffff;
 }
 
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -12px;
+    left: var(--confetti-left);
+    width: 8px;
+    height: 14px;
+    background: var(--confetti-color);
+    animation: confettiFall var(--confetti-duration) var(--confetti-delay) ease-in forwards;
+}
+
 .score-panel,
 .info-dialog {
     background: var(--paper);
@@ -476,6 +494,23 @@ button:hover {
     }
     to {
         transform: translateY(600px);
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(var(--confetti-rotation));
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(105vh) rotate(calc(var(--confetti-rotation) + 540deg));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti-piece {
+        animation-duration: 0.01ms;
     }
 }
 
